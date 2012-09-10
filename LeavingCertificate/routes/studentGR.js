@@ -42,7 +42,7 @@ StudentList.prototype = {
 
     readStudent: function(req, res) {
         studentModel.find({}, function foundStudents(err, studentsList) {
-            res.render('generalregister', { title: 'Student List ', studentList: studentsList })
+            res.render('studentlist', { title: 'Student List ', studentList: studentsList })
         });
     },
 

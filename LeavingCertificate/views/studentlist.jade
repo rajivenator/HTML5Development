@@ -1,0 +1,49 @@
+extends layout
+block content
+  h1= title
+  p Welcome to #{title}
+  form(action="/readStudent", method="post")
+    table(border="1")
+     tr
+      td Gr.No 
+      td Name                                           
+      td Caste
+      td Birth Place
+      td Mother Tongue
+      td Date of Birth
+      td Last School
+      td Date of Admission
+      td Free Seat
+      td Class Admitted To
+      td Progress
+      td Conduct
+      td Date of Leaving
+      td Class Left
+      td Remark
+     each student in studentList
+      tr
+        td #{student._id}
+        td #{student.name}
+        td #{student.caste}
+        td #{student.birthPlace}
+        td #{student.motherTongue}
+        - var day = student.dob.getDate();
+        - var month = student.dob.getMonth() + 1;
+        - var year = student.dob.getFullYear(); 
+        td #{ day + "/" + month + "/" + year}
+        td #{student.lastSchool}
+        - var day1 = student.doa.getDate();
+        - var month1 = student.doa.getMonth() + 1;
+        - var year1 = student.doa.getFullYear(); 
+        td #{ day1 + "/" + month1 + "/" + year1}   
+        td #{student.freeSeat}
+        td #{student.classAdmitted}
+        td #{student.progress}
+        td #{student.conduct}
+        - var day2 = student.dol.getDate();
+        - var month2 = student.dol.getMonth() + 1;
+        - var year2 = student.dol.getFullYear(); 
+        td #{ day2 + "/" + month2 + "/" + year2}   
+        td #{student.classLeft}
+        td #{student.remark}
+   hr
