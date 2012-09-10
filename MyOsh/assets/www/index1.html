@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>MyOsh Mobile App Demo</title>
+		<link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.1.0.min.css" />
+		<script type="text/javascript" charset="utf-8" src="cordova-1.9.0.js"></script>
+		<script src="jquery.mobile/jquery-1.7.2.min"></script>
+		<script src="jquery.mobile/jquery.mobile-1.1.0.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="helper.js"></script>
+		<script type="text/javascript" charset="utf-8">
+		
+   var admin = '';
+   var password = ''; 
+var onDeviceReady = function() {
+
+admin = document.getElementById("txtLogin").value;
+password = document.getElementById("txtPassword").value;
+alert(admin);
+alert(password);
+var ajax = new XMLHttpRequest();
+ajax.open("GET","http://114.143.187.99/mobile/inspections.nsf/test4.xsp",false);
+//ajax.open("GET","http://114.143.187.99/mobile/inspections.nsf",false);		
+ajax.setRequestHeader("Authorization", "Basic " + base64_encode(admin+":"+password)); 
+ajax.send(null);
+var txt='[' + ajax.responseText.replace(/\n/g, ',') + ']'
+var obj = eval ('([' + ajax.responseText.replace(/\n/g, ',') + '])');
+var table = "<tr><th>UniqueId</th><th>Modified</th><th>Values</th></tr>"
+for(i=0;i<obj.length;i++)
+	{
+		table=table + '<tr><td>'+obj[i].uniqueKey+'</td><td>'+obj[i].modified+'</td><td>'+obj[i].values+'</td></tr>';
+	}
+	alert(table);
+document.getElementById('outValues').innerHTML=table;
+     };
+
+     function init() {
+         document.addEventListener("deviceready", onDeviceReady, true);
+     }   
+</script>
+  </head>
+  <body> 
+
+<!-- Start of first page -->
+<div data-role="page" id="loginPage">
+
+	<div data-role="header">
+		<h1>Login Details</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<div data-role="fieldcontain">
+		    <label for="txtLogin">Login:</label>
+		    <input type="text"  id="txtLogin" value=""  />
+		</div>
+		<div data-role="fieldcontain">
+	         <label for="txtPassword">Password:</label>
+	         <input type="password"  id="txtPassword" value="" />
+		</div>
+		<div class="ui-body ui-body-b">
+		<fieldset class="ui-grid-a">
+				<div class="ui-block-a"><button type="button" data-theme="d">Cancel</button></div>
+				
+				<div class="ui-block-b"><button type="button" data-theme="a" onclick="init()">Submit</button></div>
+	    </fieldset>
+		</div>
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+
+<!-- Start of second page -->
+<div data-role="page" id="mainPage">
+
+	<div data-role="header">
+		
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<p id="outValues"></p>
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		
+	</div><!-- /footer -->
+</div><!-- /page -->
+</body>
+</html>

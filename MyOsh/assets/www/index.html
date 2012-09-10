@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<title>MyOsh PhoneGap</title>
+<link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.1.1.min.css" />
+
+
+<script src="jquery.mobile/jquery-1.7.2.min.js"></script>
+
+
+<script type="text/javascript">
+$(document).bind("mobileinit", function(){
+// $.mobile.defaultPageTransition='none';
+ $.mobile.allowCrossDomainPages = true;
+  $.mobile.touchOverflowEnabled = true;
+}); 
+</script>
+
+
+
+<script src="jquery.mobile/jquery.mobile-1.1.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="cordova-1.9.0.js"></script>
+<script type="text/javascript" charset="utf-8" src="helper.js"></script>
+<script type="text/javascript" charset="utf-8" src="apis/device.js"></script>
+<script type="text/javascript" charset="utf-8" src="apis/events.js"></script>
+<script type="text/javascript" charset="utf-8" src="apis/storage.js"></script>
+</head>
+<body onload="init();">
+	<!-- 
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#one">One</a></li>
+					<li><a href="#two">Two</a></li>
+					<li><a href="#popup">PopUp</a></li>
+				</ul>
+			</div>
+			 -->
+	<!-- /navbar -->
+	<!--  
+		<p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
+	 -->
+
+	<!-- Start of first page: #one -->
+
+	<div data-role="page" id="one">
+		<div data-role="header" data-position="fixed" data-theme="d">
+			<h4>Page Header</h4> 
+		</div>
+		<div data-role="content">
+			<fieldset class="ui-grid-a">
+				<div class="ui-block-a">
+					<button type="button" data-theme="a" onclick="createDB()"
+						id="btnCreate">Create</button>
+				</div>
+				<div class="ui-block-b">
+					<button type="button" data-theme="b" onclick="getSqlResultSet()"
+						id="btnRead">Read</button>
+				</div>
+			</fieldset>
+			<p>
+			<div id="sql-result"></div>
+			</p>
+			<p>
+			<ul data-role="listview" data-inset="true" id="dataList">
+			</ul>
+			</p>
+
+		</div>
+
+		<div data-role="footer" data-theme="d" data-position="fixed">
+			<h4>Database Load</h4>
+		</div>
+	</div>
+
+
+	<!-- Start of second page: #two -->
+	<div data-role="page" id="two">
+		<div data-role="header" data-position="fixed" data-theme="d">
+			<h4>Page Header</h4><a data-rel="back" data-theme="b" class="ui-btn-left" >Back</a>
+		</div>
+		<div data-role="content">
+			<label for="unid">UniqueId:</label> <input type="text" id="unid" value=""/> 
+			<label for="modified">Modified:</label>
+			<input type="text" id="modified" value="" /> 
+			<label for="values">Values:</label>
+			<textarea id="values"></textarea>
+			<fieldset class="ui-grid-a">
+				<div class="ui-block-a">
+					<button type="button" data-theme="a" onclick="editField()"
+						id="btnCreate">Edit</button>
+				</div>
+				<div class="ui-block-b">
+					<button type="button" data-theme="b" onclick="saveSql()"
+						id="btnRead">Save</button>
+				</div>
+			</fieldset>
+		</div>
+		<div data-role="footer" data-theme="d" data-position="fixed">
+			<h4>Page Footer</h4>
+		</div>
+	</div>
+</body>
+</html>
